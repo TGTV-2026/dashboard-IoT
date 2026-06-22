@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TerraFlow Pro - Log Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#404944",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "primary-fixed-dim": "#95d3ba",
+                        "tertiary-container": "#004870",
+                        "primary": "#003527",
+                        "surface-tint": "#2b6954",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-surface": "#191c1e",
+                        "background": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "secondary-container": "#d5e0f8",
+                        "inverse-primary": "#95d3ba",
+                        "on-tertiary-fixed": "#001d31",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#93ccff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-primary-container": "#80bea6",
+                        "secondary": "#545f73",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f7f9fb",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#002117",
+                        "tertiary-fixed": "#cce5ff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-tertiary-fixed-variant": "#004b73",
+                        "on-primary": "#ffffff",
+                        "on-background": "#191c1e",
+                        "on-tertiary-container": "#5db9ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#00314e",
+                        "on-secondary-container": "#586377",
+                        "surface": "#f7f9fb",
+                        "outline": "#707974",
+                        "on-primary-fixed-variant": "#0b513d",
+                        "primary-container": "#064e3b",
+                        "inverse-on-surface": "#eff1f3",
+                        "primary-fixed": "#b0f0d6",
+                        "outline-variant": "#bfc9c3",
+                        "surface-container": "#eceef0",
+                        "surface-container-high": "#e6e8ea"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "sm": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "max-width": "1152px",
+                        "xs": "4px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Inter"],
+                        "stat-lg-mobile": ["Inter"],
+                        "stat-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-bold": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-base": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "stat-lg-mobile": ["32px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "stat-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "body-bold": ["16px", { lineHeight: "24px", letterSpacing: "0", fontWeight: "600" }],
+                        "headline-md-mobile": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "display-lg": ["36px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-base": ["16px", { lineHeight: "24px", letterSpacing: "0", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .pulse-indicator {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Subtle grid background for the canvas to enforce industrial feel */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, #e0e3e5 1px, transparent 1px),
+                              linear-gradient(to bottom, #e0e3e5 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-on-primary-container h-screen w-screen overflow-hidden flex bg-grid-pattern">
+
+<nav class="docked left-0 h-screen w-64 hidden lg:flex flex-col bg-surface-container dark:bg-surface-container-high text-primary dark:text-primary-fixed bg-surface-container-low dark:bg-inverse-surface shadow-md flex flex-col h-full p-md space-y-sm z-50 fixed">
+<div class="flex items-center space-x-sm mb-xl pt-lg pl-sm">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm shrink-0">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-extrabold text-primary dark:text-primary-fixed leading-none">Ridho Puncul</h1>
+<p class="text-label-caps font-label-caps text-on-surface-variant opacity-80 mt-1">Puncul 1</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col space-y-xs">
+<a class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 hover:bg-surface-variant/50 dark:hover:bg-on-surface-variant/10 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-bold font-body-bold">Dashboard</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm bg-primary-container text-on-primary-container dark:bg-primary dark:text-on-primary rounded-lg transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="receipt_long">receipt_long</span>
+<span class="text-body-bold font-body-bold">Log</span>
+</a>
+</div>
+<div class="mt-auto pt-lg border-t border-outline-variant/30 flex flex-col space-y-sm">
+<a class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-body-bold font-body-bold">Support</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-body-bold font-body-bold">Sign Out</span>
+</a>
+</div>
+</nav>
+
+<div class="flex-1 lg:ml-64 p-margin-mobile lg:p-md w-full max-w-full h-screen flex flex-col overflow-y-auto lg:overflow-hidden relative">
+
+<header class="bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-40 lg:hidden shadow-sm border-b border-outline-variant/30 flex justify-between items-center w-full px-margin-mobile h-16 shrink-0 -mx-margin-mobile mb-margin-mobile px-margin-mobile">
+<h1 class="text-headline-md-mobile font-headline-md-mobile font-bold text-primary">Ridho Puncul</h1>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm shrink-0">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+</div>
+</header>
+
+<main class="flex-1 flex flex-col w-full min-h-0 space-y-md">
+<header class="hidden lg:flex flex-col lg:flex-row lg:items-center justify-between mb-2 space-y-sm lg:space-y-0 shrink-0">
+<div>
+<h2 class="text-display-lg font-display-lg text-on-background">Log Analytics</h2>
+<p class="text-body-base font-body-base text-on-surface-variant mt-1">Data riwayat dan efisiensi sistem</p>
+</div>
+<div class="flex items-center space-x-sm bg-surface-container-high px-md py-sm rounded-full shadow-sm border border-outline-variant/20">
+<div class="w-3 h-3 rounded-full bg-primary-container pulse-indicator"></div>
+<span class="text-body-bold font-body-bold text-on-surface">Puncul normal</span>
+</div>
+</header>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md shrink-0">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm p-md border-t-4 border-primary relative overflow-hidden flex flex-col justify-between">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined" style="font-size: 120px;">timer</span>
+</div>
+<div class="flex items-center justify-between z-10">
+<span class="text-label-caps font-label-caps text-on-surface-variant">TOTAL RUNTIME</span>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div class="mt-sm z-10">
+<span class="text-stat-lg-mobile md:text-stat-lg font-stat-lg text-on-surface leading-none">124</span>
+<span class="text-body-bold font-body-bold text-on-surface-variant ml-1">Hours</span>
+</div>
+<div class="mt-2 z-10 text-label-caps font-label-caps text-primary bg-primary-fixed/20 inline-block px-2 py-1 rounded w-max">
+                        +14.2% vs last month
+                    </div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm p-md flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-caps font-label-caps text-on-surface-variant">TOTAL CYCLES TODAY</span>
+<span class="material-symbols-outlined text-tertiary-container">refresh</span>
+</div>
+<div class="mt-sm">
+<span class="text-stat-lg-mobile md:text-stat-lg font-stat-lg text-on-surface leading-none">14</span>
+</div>
+<div class="mt-2 flex items-center text-on-surface-variant"><span class="material-symbols-outlined mr-1 text-[16px]">sync</span><span class="text-label-caps">System Cycle Active</span></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm p-md flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-caps font-label-caps text-on-surface-variant">AVG MOISTURE</span>
+<span class="material-symbols-outlined text-tertiary-container">grass</span>
+</div>
+<div class="mt-sm">
+<span class="text-stat-lg-mobile md:text-stat-lg font-stat-lg text-on-surface leading-none">42</span>
+<span class="text-body-bold font-body-bold text-on-surface-variant ml-1">%</span>
+</div>
+<div class="mt-2 text-label-caps font-label-caps text-on-surface-variant flex items-center">
+<span class="w-2 h-2 rounded-full bg-primary-container inline-block mr-2"></span> Optimal Range Maintained
+                    </div>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-md shrink-0">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm p-md flex flex-col overflow-hidden">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="text-body-bold font-body-bold text-on-surface">Runtime per Zone</h3>
+<button class="text-primary hover:bg-surface-variant/50 p-1 rounded transition-colors">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+<div class="flex-1 flex items-end space-x-2 md:space-x-4 mt-2 h-32 border-b border-l border-outline-variant/20 pb-2 pl-2 ml-7 relative">
+<div class="absolute top-0 bottom-0 flex flex-col justify-between text-[10px] font-label-caps text-outline h-full py-2 -left-8 w-7 text-right pr-1">
+<span class="">100m</span><span class="">75m</span><span class="">50m</span><span class="">25m</span><span class="">0</span>
+</div>
+<div class="w-full flex justify-around items-end h-full">
+<div class="w-1/6 bg-primary-container hover:bg-primary transition-colors rounded-t-md relative group cursor-pointer" style="height: 65%;">
+<div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-label-caps px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10">65m</div>
+<div class="absolute -bottom-6 w-full text-center text-label-caps text-on-surface-variant">Z1</div>
+</div>
+<div class="w-1/6 bg-surface-tint hover:bg-primary transition-colors rounded-t-md relative group cursor-pointer" style="height: 85%;">
+<div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-label-caps px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10">85m</div>
+<div class="absolute -bottom-6 w-full text-center text-label-caps text-on-surface-variant">Z2</div>
+</div>
+<div class="w-1/6 bg-secondary-container hover:bg-secondary transition-colors rounded-t-md relative group cursor-pointer" style="height: 40%;">
+<div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-label-caps px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10">40m</div>
+<div class="absolute -bottom-6 w-full text-center text-label-caps text-on-surface-variant">Z3</div>
+</div>
+<div class="w-1/6 bg-primary hover:bg-primary-container transition-colors rounded-t-md relative group cursor-pointer" style="height: 95%;">
+<div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-label-caps px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10">95m</div>
+<div class="absolute -bottom-6 w-full text-center text-label-caps text-on-surface-variant">Z4</div>
+</div>
+<div class="w-1/6 bg-tertiary-container hover:bg-tertiary transition-colors rounded-t-md relative group cursor-pointer" style="height: 55%;">
+<div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-label-caps px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity z-10">55m</div>
+<div class="absolute -bottom-6 w-full text-center text-label-caps text-on-surface-variant">Z5</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm p-md flex flex-col">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="text-body-bold font-body-bold text-on-surface">System Uptime</h3>
+</div>
+<div class="flex-1 w-full mt-2 relative min-h-[120px]">
+<svg class="absolute top-0 left-0 w-full h-[calc(100%-24px)] overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 50">
+<defs>
+<linearGradient id="uptimeGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#10b981" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#10b981" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0,10 C20,10 35,12 50,8 C65,5 75,10 100,8 L100,50 L0,50 Z" fill="url(#uptimeGrad)"></path>
+<path d="M0,10 C20,10 35,12 50,8 C65,5 75,10 100,8" fill="none" stroke="#10b981" stroke-linecap="round" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+</svg>
+<div class="absolute bottom-0 w-full flex justify-between text-label-caps font-bold text-tertiary-container px-1">
+<span>Week 1</span>
+<span>Week 2</span>
+<span>Week 3</span>
+<span>Week 4</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-sm flex flex-col flex-1 min-h-0 mb-20 lg:mb-0 mt-md">
+<div class="p-md border-b border-outline-variant/20 flex justify-between items-center bg-surface-bright shrink-0">
+<h3 class="text-body-bold font-body-bold text-on-surface">Irrigation Logs</h3>
+<button class="flex items-center space-x-1 text-primary text-label-caps font-label-caps hover:bg-surface-variant/50 px-3 py-1 rounded transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="">Export CSV</span>
+</button>
+</div>
+<div class="overflow-x-auto overflow-y-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead class="sticky top-0 bg-surface z-10 shadow-sm">
+<tr>
+<th class="py-sm px-md text-label-caps font-label-caps text-on-surface-variant border-b border-outline-variant/30">DATE &amp; TIME</th>
+<th class="py-sm px-md text-label-caps font-label-caps text-on-surface-variant border-b border-outline-variant/30">ZONE</th>
+<th class="py-sm px-md text-label-caps font-label-caps text-on-surface-variant border-b border-outline-variant/30">DURATION</th>
+<th class="py-sm px-md text-label-caps font-label-caps text-on-surface-variant border-b border-outline-variant/30">STATUS</th>
+</tr>
+</thead>
+<tbody class="text-body-base font-body-base text-on-surface">
+<tr class="hover:bg-surface-variant/20 transition-colors border-b border-outline-variant/10">
+<td class="py-sm px-md text-on-surface-variant">Jun 23, 12:30 PM</td>
+<td class="py-sm px-md font-body-bold text-on-surface">tarik dari labelling</td>
+<td class="py-sm px-md text-on-surface-variant">45 mins</td>
+<td class="py-sm px-md">
+<span class="bg-primary-fixed/30 text-primary-container text-[10px] font-label-caps px-2 py-1 rounded-full flex items-center w-max"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block mr-1"></span> Auto</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors border-b border-outline-variant/10">
+<td class="py-sm px-md text-on-surface-variant">Jun 23, 10:15 AM</td>
+<td class="py-sm px-md font-body-bold text-on-surface">tarik dari labelling</td>
+<td class="py-sm px-md text-on-surface-variant">30 mins</td>
+<td class="py-sm px-md">
+<span class="bg-primary-fixed/30 text-primary-container text-[10px] font-label-caps px-2 py-1 rounded-full flex items-center w-max"><span class="w-1.5 h-1.5 rounded-full bg-primary inline-block mr-1"></span> Auto</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors border-b border-outline-variant/10">
+<td class="py-sm px-md text-on-surface-variant">Jun 22, 18:00 PM</td>
+<td class="py-sm px-md font-body-bold text-on-surface">tarik dari labelling</td>
+<td class="py-sm px-md text-on-surface-variant">60 mins</td>
+<td class="py-sm px-md">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-label-caps px-2 py-1 rounded-full flex items-center w-max">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary inline-block mr-1"></span> Manual Override
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+
+<nav class="docked full-width bottom-0 lg:hidden rounded-t-xl bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-lg text-primary dark:text-primary-fixed border-t border-outline-variant/30 dark:border-outline/20 shadow-lg fixed left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe pb-[env(safe-area-inset-bottom)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-label-caps font-label-caps text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-8 py-1 scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined icon-fill mb-1">receipt_long</span>
+<span class="text-label-caps font-label-caps text-[10px]">Log</span>
+</a>
+</nav>
+
+<script>
+        if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
+            document.querySelector('.pb-safe')?.classList.add('pb-[env(safe-area-inset-bottom)]');
+        }
+    </script>
+</body></html>

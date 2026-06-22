@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TerraFlow Pro - Main Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-dim": "#d8dadc",
+                      "on-secondary-fixed-variant": "#3c475a",
+                      "primary-fixed": "#b0f0d6",
+                      "primary-container": "#064e3b",
+                      "inverse-on-surface": "#eff1f3",
+                      "surface-container": "#eceef0",
+                      "outline-variant": "#bfc9c3",
+                      "on-tertiary-fixed-variant": "#004b73",
+                      "on-surface-variant": "#404944",
+                      "surface-tint": "#2b6954",
+                      "inverse-surface": "#2d3133",
+                      "tertiary-container": "#004870",
+                      "on-surface": "#191c1e",
+                      "secondary-fixed-dim": "#bcc7de",
+                      "surface-variant": "#e0e3e5",
+                      "background": "#f7f9fb",
+                      "surface-container-high": "#e6e8ea",
+                      "secondary-fixed": "#d8e3fb",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#cce5ff",
+                      "tertiary": "#00314e",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#707974",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#0b513d",
+                      "on-tertiary-fixed": "#001d31",
+                      "primary": "#003527",
+                      "secondary": "#545f73",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-background": "#191c1e",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#95d3ba",
+                      "inverse-primary": "#95d3ba",
+                      "on-primary-fixed": "#002117",
+                      "secondary-container": "#d5e0f8",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#80bea6",
+                      "surface-bright": "#f7f9fb",
+                      "tertiary-fixed-dim": "#93ccff",
+                      "on-secondary-container": "#586377",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container-low": "#f2f4f6",
+                      "on-tertiary-container": "#5db9ff",
+                      "surface": "#f7f9fb",
+                      "on-secondary-fixed": "#111c2d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "margin-desktop": "32px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "xl": "32px",
+                      "max-width": "1152px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "body-base": [
+                              "Inter"
+                      ],
+                      "headline-md-mobile": [
+                              "Inter"
+                      ],
+                      "stat-lg": [
+                              "Inter"
+                      ],
+                      "body-bold": [
+                              "Inter"
+                      ],
+                      "stat-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "36px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-base": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md-mobile": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "stat-lg": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-bold": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "stat-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "36px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .pulse-indicator {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .chart-area {
+            background: linear-gradient(180deg, rgba(6, 78, 59, 0.1) 0%, rgba(6, 78, 59, 0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-on-primary-container h-screen w-screen overflow-hidden flex">
+<nav class="docked left-0 h-screen w-64 hidden lg:flex flex-col bg-surface-container dark:bg-surface-container-high text-primary dark:text-primary-fixed bg-surface-container-low dark:bg-inverse-surface shadow-md flex flex-col h-full p-md space-y-sm z-50 fixed">
+<div class="flex items-center space-x-sm mb-xl pt-lg pl-sm">
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-extrabold text-primary dark:text-primary-fixed leading-none">Ridho Puncul</h1>
+<p class="text-label-caps font-label-caps text-on-surface-variant opacity-80 mt-1">Puncul 1</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col space-y-xs">
+<a class="flex items-center space-x-md px-md py-sm bg-primary-container text-on-primary-container dark:bg-primary dark:text-on-primary rounded-lg transition-all translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-body-bold font-body-bold">Dashboard</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 hover:bg-surface-variant/50 dark:hover:bg-on-surface-variant/10 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="text-body-bold font-body-bold">Log</span>
+</a>
+</div>
+<div class="mt-auto pt-lg border-t border-outline-variant/30 flex flex-col space-y-sm">
+<button class="w-full bg-primary text-on-primary text-body-bold font-body-bold py-sm rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center space-x-sm mb-md">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="">Manual Override</span>
+</button>
+<a class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-body-bold font-body-bold">Support</span>
+</a>
+<a class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-body-bold font-body-bold">Sign Out</span>
+</a>
+</div>
+</nav>
+<main class="flex-1 lg:ml-64 p-margin-mobile lg:p-md w-full max-w-full h-screen flex flex-col overflow-y-auto lg:overflow-hidden">
+<header class="flex flex-col lg:flex-row lg:items-center justify-between mb-md space-y-sm lg:space-y-0 flex-shrink-0">
+<div>
+<h2 class="text-display-lg font-display-lg text-on-background">Header</h2>
+<p class="text-body-base font-body-base text-on-surface-variant mt-1">Body</p>
+</div>
+<div class="flex items-center space-x-sm bg-surface-container-high px-md py-sm rounded-full shadow-sm border border-outline-variant/20">
+<div class="w-3 h-3 rounded-full bg-primary-container pulse-indicator"></div>
+<span class="text-body-bold font-body-bold text-on-surface">Puncul normal</span>
+</div>
+</header>
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-md flex-shrink-0">
+<div class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-primary border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider">Sensor 1</h3>
+<div class="mt-xs flex items-center space-x-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary-fixed text-on-primary-fixed-variant">Optimal</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="water">water</span>
+</div>
+<div class="flex items-end space-x-md mt-auto">
+<div class="text-stat-lg font-stat-lg text-on-surface">68<span class="text-headline-md font-headline-md text-on-surface-variant ml-1">%</span></div>
+<div class="relative w-10 h-10 mb-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path>
+<path class="text-primary-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="68, 100" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-primary border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider">Sensor 2</h3>
+<div class="mt-xs flex items-center space-x-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary-fixed text-on-primary-fixed-variant">Optimal</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="water">water</span>
+</div>
+<div class="flex items-end space-x-md mt-auto">
+<div class="text-stat-lg font-stat-lg text-on-surface">72<span class="text-headline-md font-headline-md text-on-surface-variant ml-1">%</span></div>
+<div class="relative w-10 h-10 mb-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path>
+<path class="text-primary-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="72, 100" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-outline border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider">Sensor 3</h3>
+<div class="mt-xs flex items-center space-x-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-surface-variant text-on-surface-variant">Drying</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="water">water</span>
+</div>
+<div class="flex items-end space-x-md mt-auto">
+<div class="text-stat-lg font-stat-lg text-on-surface">54<span class="text-headline-md font-headline-md text-on-surface-variant ml-1">%</span></div>
+<div class="relative w-10 h-10 mb-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path>
+<path class="text-outline stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="54, 100" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-primary border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between">
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h3 class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider">Sensor 4</h3>
+<div class="mt-xs flex items-center space-x-sm">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary-fixed text-on-primary-fixed-variant">Optimal</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="water">water</span>
+</div>
+<div class="flex items-end space-x-md mt-auto">
+<div class="text-stat-lg font-stat-lg text-on-surface">81<span class="text-headline-md font-headline-md text-on-surface-variant ml-1">%</span></div>
+<div class="relative w-10 h-10 mb-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path>
+<path class="text-primary-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="81, 100" stroke-width="4"></path>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md flex-1 min-h-0 pb-16 lg:pb-0">
+<section class="lg:col-span-2 bg-surface rounded-xl shadow-sm border border-outline-variant/20 p-md flex flex-col min-h-0">
+<div class="flex justify-between items-center mb-sm">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface">Tren Kelembapan Tanah</h3>
+<p class="text-body-base font-body-base text-on-surface-variant">Data dalam 24 jam</p>
+</div>
+<div class="flex space-x-sm">
+<button class="px-md py-xs rounded-md bg-surface-variant text-on-surface-variant text-label-caps font-label-caps hover:bg-outline-variant/30 transition-colors">24H</button>
+<button class="px-md py-xs rounded-md text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-colors">7D</button>
+</div>
+</div><div class="flex flex-wrap gap-sm mb-sm">
+<button class="px-md py-1 rounded-full bg-primary text-on-primary text-label-caps font-label-caps shadow-sm transition-all">All Zones</button>
+<button class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#10b981]"></span> Zone 1
+    </button>
+<button class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#6366f1]"></span> Zone 2
+    </button>
+<button class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span> Zone 3
+    </button>
+<button class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#06b6d4]"></span> Zone 4
+    </button>
+</div>
+<div class="flex-1 relative w-full min-h-[150px] border-b border-l border-outline-variant/30 mt-sm">
+<div class="absolute -left-8 top-0 h-full flex flex-col justify-between text-label-caps font-label-caps text-on-surface-variant py-2">
+<span class="">100%</span>
+<span class="">75%</span>
+<span class="">50%</span>
+<span class="">25%</span>
+<span class="">0%</span>
+</div>
+<div class="absolute -bottom-8 left-0 w-full flex justify-between text-label-caps font-label-caps text-on-surface-variant px-2">
+<span class="">00:00</span>
+<span class="">06:00</span>
+<span class="">12:00</span>
+<span class="">18:00</span>
+<span class="">Now</span>
+</div>
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="w-full border-t border-outline-variant/10"></div>
+<div class="w-full border-t border-outline-variant/10"></div>
+<div class="w-full border-t border-outline-variant/10"></div>
+<div class="w-full border-t border-outline-variant/10"></div>
+<div class="w-full border-t border-outline-variant/10"></div>
+</div>
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#10b981" stop-opacity="0.1"></stop><stop offset="100%" stop-color="#10b981" stop-opacity="0"></stop></lineargradient>
+<lineargradient id="grad2" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#6366f1" stop-opacity="0.1"></stop><stop offset="100%" stop-color="#6366f1" stop-opacity="0"></stop></lineargradient>
+</defs>
+<rect fill="#b0f0d6" fill-opacity="0.05" height="40" width="100" x="0" y="20"></rect>
+<path d="M0,65 C20,60 40,40 60,45 C80,50 90,30 100,25 L100,100 L0,100 Z" fill="url(#grad1)"></path>
+<path d="M0,65 C20,60 40,40 60,45 C80,50 90,30 100,25" fill="none" stroke="#10b981" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M0,75 C25,70 45,55 65,60 C85,65 95,45 100,40 L100,100 L0,100 Z" fill="url(#grad2)"></path>
+<path d="M0,75 C25,70 45,55 65,60 C85,65 95,45 100,40" fill="none" stroke="#6366f1" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M0,85 C20,80 40,75 60,80 C80,85 90,70 100,65" fill="none" stroke="#f59e0b" stroke-dasharray="2,2" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M0,55 C20,45 40,35 60,30 C80,25 90,15 100,10" fill="none" stroke="#06b6d4" stroke-linecap="round" stroke-width="1.5"></path>
+<circle cx="100" cy="40" fill="#6366f1" r="1.5"></circle>
+<circle cx="100" cy="65" fill="#f59e0b" r="1.5"></circle>
+<circle cx="100" cy="10" fill="#06b6d4" r="1.5"></circle>
+</svg>
+</div>
+</section>
+<div class="flex flex-col space-y-md min-h-0">
+<section class="bg-surface rounded-xl shadow-sm border border-outline-variant/20 p-md flex flex-col min-h-0 flex-1">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-xs">Manual Override</h3>
+<p class="text-body-base font-body-base text-on-surface-variant mb-1">Solenoid Valve Controls</p>
+<div class="flex flex-col justify-between flex-1 mt-1">
+<div class="flex items-center justify-between px-sm py-1 rounded-lg bg-primary-fixed/20 border border-primary-fixed hover:bg-primary-fixed/30 transition-colors">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="water_pump">water_pump</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Main Pump</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Pompa Puncul Utama</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="valve">valve</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Selenoid 1</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">ini labeling aja</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-outline" data-icon="valve">valve</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Selenoid 2</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">ini labeling aja</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="valve">valve</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Selenoid 3</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">ini labeling aja</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-outline" data-icon="valve">valve</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Selenoid 4</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">ini labeling aja</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</section>
+<section class="bg-surface rounded-xl shadow-sm border border-outline-variant/20 p-md flex-shrink-0">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="text-headline-md font-headline-md text-on-surface">Power &amp; Infrastructure</h3>
+</div>
+<ul class="space-y-sm mt-sm">
+<li class="flex items-center justify-between px-sm py-1 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="power">power</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Mains Power</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Listrik Tercolok</div>
+</div>
+</div>
+<div class="w-3 h-3 rounded-full bg-[#10b981] pulse-indicator shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</li>
+<li class="flex items-center justify-between px-sm py-1 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="battery_charging_full">battery_charging_full</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">PSU Status</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Listrik PSU</div>
+</div>
+</div>
+<div class="w-3 h-3 rounded-full bg-[#10b981] pulse-indicator shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</li>
+<li class="flex items-center justify-between px-sm py-1 rounded-lg bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-center space-x-md">
+<span class="material-symbols-outlined text-primary-container" data-icon="water_pump">water_pump</span>
+<div>
+<div class="text-body-bold font-body-bold text-on-surface">Pump Status</div>
+<div class="text-label-caps font-label-caps text-on-surface-variant">Pompa Nyala</div>
+</div>
+</div>
+<div class="w-3 h-3 rounded-full bg-[#10b981] pulse-indicator shadow-[0_0_8px_rgba(16,185,129,0.6)]"></div>
+</li>
+</ul>
+</section>
+</div>
+</div>
+</main>
+<nav class="docked full-width bottom-0 lg:hidden rounded-t-xl bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-lg text-primary dark:text-primary-fixed border-t border-outline-variant/30 dark:border-outline/20 shadow-lg fixed left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe pb-[env(safe-area-inset-bottom)]">
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 transition-transform duration-150 group" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-caps font-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed group transition-colors" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-caps font-label-caps mt-1">Log</span>
+</a>
+</nav>
+<script>
+        // Simple script to handle bottom nav safe area on mobile
+        if (CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
+            document.querySelector('.pb-safe')?.classList.add('pb-[env(safe-area-inset-bottom)]');
+        }
+    </script>
+</body></html>  
