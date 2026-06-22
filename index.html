@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring IoT TGTV</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .btn-actuator { transition: all 0.2s ease-in-out; }
+        .btn-actuator:disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(100%); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans p-6">
+
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center text-blue-600">Dashboard Monitoring Pertanian</h1>
+
+        <h2 class="text-xl font-semibold mb-4 border-b-2 border-gray-300 pb-2">Status Kelembapan Tanah (Raw Data)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-blue-500">
+                <h3 class="text-lg font-medium text-gray-500">Sensor 1</h3>
+                <p id="moisture-1" class="text-4xl font-bold text-blue-600 mt-2">--</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-blue-500">
+                <h3 class="text-lg font-medium text-gray-500">Sensor 2</h3>
+                <p id="moisture-2" class="text-4xl font-bold text-blue-600 mt-2">--</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-blue-500">
+                <h3 class="text-lg font-medium text-gray-500">Sensor 3</h3>
+                <p id="moisture-3" class="text-4xl font-bold text-blue-600 mt-2">--</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center border-t-4 border-blue-500">
+                <h3 class="text-lg font-medium text-gray-500">Sensor 4</h3>
+                <p id="moisture-4" class="text-4xl font-bold text-blue-600 mt-2">--</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-4 border-b-2 border-gray-300 pb-2 gap-4">
+            <h2 class="text-xl font-semibold">Kontrol Aktuator</h2>
+            
+            <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-lg shadow-sm">
+                <span class="text-sm font-bold text-blue-600" id="label-auto">AUTO</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="mode-toggle" class="sr-only peer" onchange="sendModeToggle()">
+                    <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
+                <span class="text-sm font-bold text-gray-400" id="label-manual">MANUAL</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <h3 class="text-lg font-medium mb-4">Solenoid Valve 1</h3>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/valve1', 'ON')" class="btn-actuator bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow mr-2" disabled>ON</button>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/valve1', 'OFF')" class="btn-actuator bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow" disabled>OFF</button>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <h3 class="text-lg font-medium mb-4">Solenoid Valve 2</h3>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/valve2', 'ON')" class="btn-actuator bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow mr-2" disabled>ON</button>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/valve2', 'OFF')" class="btn-actuator bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow" disabled>OFF</button>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                <h3 class="text-lg font-medium mb-4">Solenoid Valve 3</h3>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/valve3', 'ON')" class="btn-actuator bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow mr-2" disabled>ON</button>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/valve3', 'OFF')" class="btn-actuator bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded shadow" disabled>OFF</button>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md text-center border-2 border-blue-200">
+                <h3 class="text-lg font-bold mb-4 text-blue-700">Pompa Air Utama</h3>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/pompa', 'ON')" class="btn-actuator bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow mr-2" disabled>ON</button>
+                <button onclick="sendCommand('tgtv_ridho/kontrol/pompa', 'OFF')" class="btn-actuator bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded shadow" disabled>OFF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ws = new WebSocket("ws://" + window.location.host + "/ws");
+
+        ws.onopen = function() { console.log("Terhubung ke WebSocket Server"); };
+
+        ws.onmessage = function(event) {
+            try {
+                const data = JSON.parse(event.data);
+                
+                // Distribusikan data sensor sesuai topik yang dikirim ESP32
+                if (data.topic === "tgtv_ridho/sensor/soil1") {
+                    document.getElementById("moisture-1").innerText = data.payload;
+                } else if (data.topic === "tgtv_ridho/sensor/soil2") {
+                    document.getElementById("moisture-2").innerText = data.payload;
+                } else if (data.topic === "tgtv_ridho/sensor/soil3") {
+                    document.getElementById("moisture-3").innerText = data.payload;
+                } else if (data.topic === "tgtv_ridho/sensor/soil4") {
+                    document.getElementById("moisture-4").innerText = data.payload;
+                } 
+                // Sinkronisasi Toggle Mode dengan hardware ESP32
+                else if (data.topic === "tgtv_ridho/status/mode") {
+                    const isManual = (data.payload === "manual");
+                    const toggle = document.getElementById("mode-toggle");
+                    if (toggle.checked !== isManual) {
+                        toggle.checked = isManual;
+                        updateUI(isManual);
+                    }
+                }
+            } catch (e) {
+                console.error("Gagal memparsing pesan:", e);
+            }
+        };
+
+        // Mengirim instruksi pindah mode ke backend/ESP32
+        function sendModeToggle() {
+            const isManual = document.getElementById("mode-toggle").checked;
+            const modePayload = isManual ? "manual" : "auto";
+            sendCommand("tgtv_ridho/kontrol/mode", modePayload);
+            updateUI(isManual);
+        }
+
+        // Fungsi merubah warna dan status tombol berdasarkan mode
+        function updateUI(isManual) {
+            const buttons = document.querySelectorAll(".btn-actuator");
+            
+            document.getElementById("label-auto").classList.toggle("text-blue-600", !isManual);
+            document.getElementById("label-auto").classList.toggle("text-gray-400", isManual);
+            document.getElementById("label-manual").classList.toggle("text-blue-600", isManual);
+            document.getElementById("label-manual").classList.toggle("text-gray-400", !isManual);
+
+            buttons.forEach(btn => btn.disabled = !isManual);
+        }
+
+        // Fungsi untuk mengirim perintah kontrol ke Golang via WebSockets
+        function sendCommand(topic, payload) {
+            const command = { topic: topic, payload: payload };
+            ws.send(JSON.stringify(command));
+            console.log("Mengirim perintah:", command);
+        }
+    </script>
+</body>
+</html>
