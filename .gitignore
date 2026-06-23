@@ -1,0 +1,22 @@
+# Build / Compiled binaries
+/irigasi-pertanian/dashboard-irigasi-iot/main
+*.exe
+*.out
+*.app
+
+# Environment Variables
+.env
+*.env.local
+
+# PlatformIO
+.pio/
+
+# VS Code & Workspace
+.vscode/*
+!.vscode/settings.json
+*.code-workspace
+.idea/
+
+# OS specific files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,1012 @@
+<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>TerraFlow Pro - Main Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- APEXCHARTS LIBRARY -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#d8dadc",
+              "on-secondary-fixed-variant": "#3c475a",
+              "primary-fixed": "#b0f0d6",
+              "primary-container": "#064e3b",
+              "inverse-on-surface": "#eff1f3",
+              "surface-container": "#eceef0",
+              "outline-variant": "#bfc9c3",
+              "on-tertiary-fixed-variant": "#004b73",
+              "on-surface-variant": "#404944",
+              "surface-tint": "#2b6954",
+              "inverse-surface": "#2d3133",
+              "tertiary-container": "#004870",
+              "on-surface": "#191c1e",
+              "secondary-fixed-dim": "#bcc7de",
+              "surface-variant": "#e0e3e5",
+              background: "#f7f9fb",
+              "surface-container-high": "#e6e8ea",
+              "secondary-fixed": "#d8e3fb",
+              "on-primary": "#ffffff",
+              "tertiary-fixed": "#cce5ff",
+              tertiary: "#00314e",
+              "on-secondary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              outline: "#707974",
+              "on-error": "#ffffff",
+              "on-primary-fixed-variant": "#0b513d",
+              "on-tertiary-fixed": "#001d31",
+              primary: "#003527",
+              secondary: "#545f73",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a",
+              "on-background": "#191c1e",
+              error: "#ba1a1a",
+              "primary-fixed-dim": "#95d3ba",
+              "inverse-primary": "#95d3ba",
+              "on-primary-fixed": "#002117",
+              "secondary-container": "#d5e0f8",
+              "error-container": "#ffdad6",
+              "on-primary-container": "#80bea6",
+              "surface-bright": "#f7f9fb",
+              "tertiary-fixed-dim": "#93ccff",
+              "on-secondary-container": "#586377",
+              "surface-container-highest": "#e0e3e5",
+              "surface-container-low": "#f2f4f6",
+              "on-tertiary-container": "#5db9ff",
+              surface: "#f7f9fb",
+              "on-secondary-fixed": "#111c2d",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              sm: "8px",
+              "margin-desktop": "32px",
+              lg: "24px",
+              xs: "4px",
+              md: "16px",
+              "margin-mobile": "16px",
+              gutter: "24px",
+              xl: "32px",
+              "max-width": "1152px",
+              unit: "4px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "display-lg": ["Inter"],
+              "label-caps": ["Inter"],
+              "body-base": ["Inter"],
+              "headline-md-mobile": ["Inter"],
+              "stat-lg": ["Inter"],
+              "body-bold": ["Inter"],
+              "stat-lg-mobile": ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "display-lg": [
+                "36px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-caps": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-base": [
+                "16px",
+                { lineHeight: "24px", letterSpacing: "0", fontWeight: "400" },
+              ],
+              "headline-md-mobile": [
+                "20px",
+                {
+                  lineHeight: "28px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "stat-lg": [
+                "40px",
+                {
+                  lineHeight: "48px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+              "body-bold": [
+                "16px",
+                { lineHeight: "24px", letterSpacing: "0", fontWeight: "600" },
+              ],
+              "stat-lg-mobile": [
+                "32px",
+                {
+                  lineHeight: "36px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <link href="../static/main.css" rel="stylesheet" />
+  </head>
+  <body
+    class="bg-background text-on-background font-body-base antialiased selection:bg-primary-container selection:text-on-primary-container h-screen w-screen overflow-hidden flex"
+  >
+    <nav
+      class="docked left-0 h-screen w-64 hidden lg:flex flex-col bg-surface-container dark:bg-surface-container-high text-primary dark:text-primary-fixed bg-surface-container-low dark:bg-inverse-surface shadow-md flex flex-col h-full p-md space-y-sm z-50 fixed"
+    >
+      <div class="flex items-center space-x-sm mb-xl pt-lg pl-sm">
+        <div
+          class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center shadow-sm"
+        >
+          <span class="material-symbols-outlined" data-icon="water_drop"
+            >water_drop</span
+          >
+        </div>
+        <div>
+          <h1
+            class="text-headline-md font-headline-md font-extrabold text-primary dark:text-primary-fixed leading-none"
+          >
+            Dashboard
+          </h1>
+          <p
+            class="text-label-caps font-label-caps text-on-surface-variant opacity-80 mt-1"
+          >
+            Irigasi Pertanian
+          </p>
+        </div>
+      </div>
+      <div class="flex-1 flex flex-col space-y-xs">
+        <a
+          class="flex items-center space-x-md px-md py-sm bg-primary-container text-on-primary-container dark:bg-primary dark:text-on-primary rounded-lg transition-all translate-x-1 duration-200"
+          href="dashboard.html"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="dashboard"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >dashboard</span
+          >
+          <span class="text-body-bold font-body-bold">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 hover:bg-surface-variant/50 dark:hover:bg-on-surface-variant/10 transition-all rounded-lg"
+          href="log.html"
+        >
+          <span class="material-symbols-outlined" data-icon="receipt_long"
+            >receipt_long</span
+          >
+          <span class="text-body-bold font-body-bold">Log</span>
+        </a>
+      </div>
+      <div
+        class="mt-auto pt-lg border-t border-outline-variant/30 flex flex-col space-y-sm"
+      >
+        <!-- Tombol Switch Mode -->
+        <button
+          id="btn-mode"
+          onclick="toggleMode()"
+          class="w-full bg-primary text-on-primary text-body-bold font-body-bold py-sm rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center space-x-sm mb-md"
+        >
+          <span
+            class="material-symbols-outlined"
+            id="icon-mode"
+            data-icon="bolt"
+            >bolt</span
+          >
+          <span id="text-mode">Manual Override</span>
+        </button>
+        <a
+          class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="help">help</span>
+          <span class="text-body-bold font-body-bold">Support</span>
+        </a>
+        <a
+          class="flex items-center space-x-md px-md py-sm text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant/50 rounded-lg transition-all"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="logout"
+            >logout</span
+          >
+          <span class="text-body-bold font-body-bold">Sign Out</span>
+        </a>
+      </div>
+    </nav>
+    <main
+      class="flex-1 lg:ml-64 p-margin-mobile lg:p-md w-full max-w-full h-screen flex flex-col overflow-y-auto lg:overflow-hidden"
+    >
+      <header
+        class="flex flex-col lg:flex-row lg:items-center justify-between mb-md space-y-sm lg:space-y-0 flex-shrink-0"
+      >
+        <div>
+          <h2 class="text-display-lg font-display-lg text-on-background">
+            Real Time
+          </h2>
+          <p class="text-body-base font-body-base text-on-surface-variant mt-1">
+            Monitoring
+          </p>
+        </div>
+        <div
+          class="flex items-center space-x-sm bg-surface-container-high px-md py-sm rounded-full shadow-sm border border-outline-variant/20"
+        >
+          <div
+            class="w-3 h-3 rounded-full bg-primary-container pulse-indicator"
+          ></div>
+          <span class="text-body-bold font-body-bold text-on-surface"
+            >Perangkat Aman</span
+          >
+        </div>
+      </header>
+      <section
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-md flex-shrink-0"
+      >
+        <!-- SENSOR 1 -->
+        <div
+          class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-primary border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between"
+        >
+          <div class="flex justify-between items-start mb-sm">
+            <div>
+              <h3
+                class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider"
+              >
+                Sensor 1
+              </h3>
+              <div class="mt-xs flex items-center space-x-sm">
+                <span
+                  id="status-1"
+                  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container"
+                  >Mati</span
+                >
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-outline"
+              data-icon="water"
+              >water</span
+            >
+          </div>
+          <div class="flex items-end justify-between w-full mt-auto">
+            <div class="flex items-end space-x-md">
+              <div class="text-stat-lg font-stat-lg text-on-surface">
+                <span id="val-1">--</span
+                ><span
+                  class="text-headline-md font-headline-md text-on-surface-variant ml-1"
+                  >%</span
+                >
+              </div>
+              <div class="relative w-10 h-10 mb-0">
+                <svg
+                  class="w-full h-full transform -rotate-90"
+                  viewbox="0 0 36 36"
+                >
+                  <path
+                    class="text-surface-variant stroke-current"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-width="4"
+                  ></path>
+                  <path
+                    id="svg-1"
+                    class="text-primary-container stroke-current transition-all duration-500"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-dasharray="0, 100"
+                    stroke-width="4"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-label-caps font-label-caps text-on-surface-variant opacity-60 mb-1"
+            >
+              RAW: <span id="raw-1">--</span>
+            </div>
+          </div>
+        </div>
+        <!-- SENSOR 2 -->
+        <div
+          class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-primary border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between"
+        >
+          <div class="flex justify-between items-start mb-sm">
+            <div>
+              <h3
+                class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider"
+              >
+                Sensor 2
+              </h3>
+              <div class="mt-xs flex items-center space-x-sm">
+                <span
+                  id="status-2"
+                  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container"
+                  >Mati</span
+                >
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-outline"
+              data-icon="water"
+              >water</span
+            >
+          </div>
+          <div class="flex items-end justify-between w-full mt-auto">
+            <div class="flex items-end space-x-md">
+              <div class="text-stat-lg font-stat-lg text-on-surface">
+                <span id="val-2">--</span
+                ><span
+                  class="text-headline-md font-headline-md text-on-surface-variant ml-1"
+                  >%</span
+                >
+              </div>
+              <div class="relative w-10 h-10 mb-0">
+                <svg
+                  class="w-full h-full transform -rotate-90"
+                  viewbox="0 0 36 36"
+                >
+                  <path
+                    class="text-surface-variant stroke-current"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-width="4"
+                  ></path>
+                  <path
+                    id="svg-2"
+                    class="text-primary-container stroke-current transition-all duration-500"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-dasharray="0, 100"
+                    stroke-width="4"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-label-caps font-label-caps text-on-surface-variant opacity-60 mb-1"
+            >
+              RAW: <span id="raw-2">--</span>
+            </div>
+          </div>
+        </div>
+        <!-- SENSOR 3 -->
+        <div
+          class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-outline border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between"
+        >
+          <div class="flex justify-between items-start mb-sm">
+            <div>
+              <h3
+                class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider"
+              >
+                Sensor 3
+              </h3>
+              <div class="mt-xs flex items-center space-x-sm">
+                <span
+                  id="status-3"
+                  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container"
+                  >Mati</span
+                >
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-outline"
+              data-icon="water"
+              >water</span
+            >
+          </div>
+          <div class="flex items-end justify-between w-full mt-auto">
+            <div class="flex items-end space-x-md">
+              <div class="text-stat-lg font-stat-lg text-on-surface">
+                <span id="val-3">--</span
+                ><span
+                  class="text-headline-md font-headline-md text-on-surface-variant ml-1"
+                  >%</span
+                >
+              </div>
+              <div class="relative w-10 h-10 mb-0">
+                <svg
+                  class="w-full h-full transform -rotate-90"
+                  viewbox="0 0 36 36"
+                >
+                  <path
+                    class="text-surface-variant stroke-current"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-width="4"
+                  ></path>
+                  <path
+                    id="svg-3"
+                    class="text-outline stroke-current transition-all duration-500"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-dasharray="0, 100"
+                    stroke-width="4"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-label-caps font-label-caps text-on-surface-variant opacity-60 mb-1"
+            >
+              RAW: <span id="raw-3">--</span>
+            </div>
+          </div>
+        </div>
+        <!-- SENSOR 4 -->
+        <div
+          class="bg-surface rounded-xl p-md shadow-sm border-t-4 border-primary border border-outline-variant/20 relative overflow-hidden flex flex-col justify-between"
+        >
+          <div class="flex justify-between items-start mb-sm">
+            <div>
+              <h3
+                class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-wider"
+              >
+                Sensor 4
+              </h3>
+              <div class="mt-xs flex items-center space-x-sm">
+                <span
+                  id="status-4"
+                  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container"
+                  >Mati</span
+                >
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-outline"
+              data-icon="water"
+              >water</span
+            >
+          </div>
+          <div class="flex items-end justify-between w-full mt-auto">
+            <div class="flex items-end space-x-md">
+              <div class="text-stat-lg font-stat-lg text-on-surface">
+                <span id="val-4">--</span
+                ><span
+                  class="text-headline-md font-headline-md text-on-surface-variant ml-1"
+                  >%</span
+                >
+              </div>
+              <div class="relative w-10 h-10 mb-0">
+                <svg
+                  class="w-full h-full transform -rotate-90"
+                  viewbox="0 0 36 36"
+                >
+                  <path
+                    class="text-surface-variant stroke-current"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-width="4"
+                  ></path>
+                  <path
+                    id="svg-4"
+                    class="text-primary-container stroke-current transition-all duration-500"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none"
+                    stroke-dasharray="0, 100"
+                    stroke-width="4"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-label-caps font-label-caps text-on-surface-variant opacity-60 mb-1"
+            >
+              RAW: <span id="raw-4">--</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-3 gap-md flex-1 min-h-0 pb-16 lg:pb-0"
+      >
+        <section
+          class="lg:col-span-2 bg-surface rounded-xl shadow-sm border border-outline-variant/20 p-md flex flex-col min-h-0"
+        >
+          <div class="flex justify-between items-center mb-sm">
+            <div>
+              <h3 class="text-headline-md font-headline-md text-on-surface">
+                Tren Kelembapan Tanah
+              </h3>
+              <p class="text-body-base font-body-base text-on-surface-variant">
+                Data Real-Time
+              </p>
+            </div>
+            <div class="flex space-x-sm">
+              <button
+                class="px-md py-xs rounded-md bg-surface-variant text-on-surface-variant text-label-caps font-label-caps hover:bg-outline-variant/30 transition-colors"
+              >
+                LIVE
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-sm mb-sm">
+            <button
+              class="px-md py-1 rounded-full bg-primary text-on-primary text-label-caps font-label-caps shadow-sm transition-all"
+            >
+              All Zones
+            </button>
+            <button
+              class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#10b981]"></span> Zone 1
+            </button>
+            <button
+              class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#6366f1]"></span> Zone 2
+            </button>
+            <button
+              class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span> Zone 3
+            </button>
+            <button
+              class="px-md py-1 rounded-full bg-surface-container-high text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-variant transition-all flex items-center gap-1"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#06b6d4]"></span> Zone 4
+            </button>
+          </div>
+          <!-- CONTAINER CHART (APEXCHARTS) -->
+          <div class="flex-1 relative w-full min-h-[150px] mt-sm">
+            <div id="apex-chart" class="absolute inset-0 w-full h-full"></div>
+          </div>
+        </section>
+        <div class="flex flex-col space-y-md min-h-0">
+          <section
+            class="bg-surface rounded-xl shadow-sm border border-outline-variant/20 p-md flex flex-col min-h-0 flex-1"
+          >
+            <h3 class="text-headline-md font-headline-md text-on-surface mb-xs">
+              Kontrol Aktuator
+            </h3>
+            <p
+              class="text-body-base font-body-base text-on-surface-variant mb-1"
+            >
+              Status Mode:
+              <span id="label-mode-status" class="font-bold text-primary"
+                >AUTO</span
+              >
+            </p>
+            <div class="flex flex-col justify-between flex-1 mt-1">
+              <div
+                class="flex items-center justify-between px-sm py-1 rounded-lg bg-primary-fixed/20 border border-primary-fixed hover:bg-primary-fixed/30 transition-colors"
+              >
+                <div class="flex items-center space-x-md">
+                  <span
+                    class="material-symbols-outlined text-primary-container"
+                    data-icon="water_pump"
+                    >water_pump</span
+                  >
+                  <div>
+                    <div class="text-body-bold font-body-bold text-on-surface">
+                      Main Pump
+                    </div>
+                    <div
+                      class="text-label-caps font-label-caps text-on-surface-variant"
+                    >
+                      Pompa Puncul Utama
+                    </div>
+                  </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    id="toggle-pompa"
+                    onchange="
+                      sendActuatorCmd('tgtv_ridho/kontrol/pompa', this.checked)
+                    "
+                    type="checkbox"
+                    class="sr-only peer act-toggle"
+                    disabled
+                  />
+                  <div
+                    class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"
+                  ></div>
+                </label>
+              </div>
+              <div
+                class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <div class="flex items-center space-x-md">
+                  <span
+                    class="material-symbols-outlined text-primary-container"
+                    data-icon="valve"
+                    >valve</span
+                  >
+                  <div>
+                    <div class="text-body-bold font-body-bold text-on-surface">
+                      Selenoid 1
+                    </div>
+                    <div
+                      class="text-label-caps font-label-caps text-on-surface-variant"
+                    >
+                      Zona 1
+                    </div>
+                  </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    id="toggle-v1"
+                    onchange="
+                      sendActuatorCmd('tgtv_ridho/kontrol/valve1', this.checked)
+                    "
+                    type="checkbox"
+                    class="sr-only peer act-toggle"
+                    disabled
+                  />
+                  <div
+                    class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"
+                  ></div>
+                </label>
+              </div>
+              <div
+                class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <div class="flex items-center space-x-md">
+                  <span
+                    class="material-symbols-outlined text-outline"
+                    data-icon="valve"
+                    >valve</span
+                  >
+                  <div>
+                    <div class="text-body-bold font-body-bold text-on-surface">
+                      Selenoid 2
+                    </div>
+                    <div
+                      class="text-label-caps font-label-caps text-on-surface-variant"
+                    >
+                      Zona 2
+                    </div>
+                  </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    id="toggle-v2"
+                    onchange="
+                      sendActuatorCmd('tgtv_ridho/kontrol/valve2', this.checked)
+                    "
+                    type="checkbox"
+                    class="sr-only peer act-toggle"
+                    disabled
+                  />
+                  <div
+                    class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"
+                  ></div>
+                </label>
+              </div>
+              <div
+                class="flex items-center justify-between px-sm py-1 rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                <div class="flex items-center space-x-md">
+                  <span
+                    class="material-symbols-outlined text-primary-container"
+                    data-icon="valve"
+                    >valve</span
+                  >
+                  <div>
+                    <div class="text-body-bold font-body-bold text-on-surface">
+                      Selenoid 3
+                    </div>
+                    <div
+                      class="text-label-caps font-label-caps text-on-surface-variant"
+                    >
+                      Zona 3
+                    </div>
+                  </div>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input
+                    id="toggle-v3"
+                    onchange="
+                      sendActuatorCmd('tgtv_ridho/kontrol/valve3', this.checked)
+                    "
+                    type="checkbox"
+                    class="sr-only peer act-toggle"
+                    disabled
+                  />
+                  <div
+                    class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"
+                  ></div>
+                </label>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <nav
+      class="docked full-width bottom-0 lg:hidden rounded-t-xl bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-lg text-primary dark:text-primary-fixed border-t border-outline-variant/30 dark:border-outline/20 shadow-lg fixed left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe pb-[env(safe-area-inset-bottom)]"
+    >
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-90 transition-transform duration-150 group"
+        href="dashboard.html"
+      >
+        <span
+          class="material-symbols-outlined"
+          data-icon="home"
+          style="font-variation-settings: &quot;FILL&quot; 1"
+          >home</span
+        >
+        <span class="text-label-caps font-label-caps mt-1">Home</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed group transition-colors"
+        href="log.html"
+      >
+        <span
+          class="material-symbols-outlined group-hover:scale-110 transition-transform"
+          data-icon="receipt_long"
+          >receipt_long</span
+        >
+        <span class="text-label-caps font-label-caps mt-1">Log</span>
+      </a>
+    </nav>
+
+    <script>
+      // Inisialisasi WebSocket
+      const ws = new WebSocket("ws://" + window.location.host + "/ws");
+
+      // Variabel Global
+      let currentMode = "auto";
+      let lastSeen = { 1: 0, 2: 0, 3: 0, 4: 0 }; // Menyimpan timestamp terakhir sensor kedetect
+      let apexChart; // Objek Grafik
+
+      // Setup Grafik ApexCharts
+      document.addEventListener("DOMContentLoaded", function () {
+        var options = {
+          series: [
+            { name: "Zone 1", data: [] },
+            { name: "Zone 2", data: [] },
+            { name: "Zone 3", data: [] },
+            { name: "Zone 4", data: [] },
+          ],
+          chart: {
+            type: "area",
+            height: "100%",
+            width: "100%",
+            animations: {
+              enabled: true,
+              easing: "linear",
+              dynamicAnimation: { speed: 1000 },
+            },
+            toolbar: { show: false },
+            zoom: { enabled: false },
+          },
+          colors: ["#10b981", "#6366f1", "#f59e0b", "#06b6d4"],
+          dataLabels: { enabled: false },
+          stroke: { curve: "smooth", width: 2 },
+          fill: {
+            type: "gradient",
+            gradient: {
+              shadeIntensity: 1,
+              opacityFrom: 0.4,
+              opacityTo: 0,
+              stops: [0, 100],
+            },
+          },
+          xaxis: {
+            type: "datetime",
+            range: 60000, // Menampilkan rentang 60 detik terakhir
+            labels: { style: { colors: "#707974", fontFamily: "Inter" } },
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+          },
+          yaxis: {
+            min: 0,
+            max: 100,
+            labels: {
+              style: { colors: "#707974", fontFamily: "Inter" },
+              formatter: (val) => {
+                return val + "%";
+              },
+            },
+          },
+          grid: {
+            borderColor: "rgba(112, 121, 116, 0.2)",
+            strokeDashArray: 4,
+            padding: { top: 0, right: 0, bottom: 0, left: 10 },
+          },
+          legend: { show: false },
+        };
+        apexChart = new ApexCharts(
+          document.querySelector("#apex-chart"),
+          options,
+        );
+        apexChart.render();
+      });
+
+      ws.onopen = function () {
+        console.log("Terhubung ke WebSocket Server");
+      };
+
+      ws.onmessage = function (event) {
+        try {
+          const data = JSON.parse(event.data);
+          const now = Date.now();
+
+          // SENSOR DATA HANDLING
+          if (data.topic.startsWith("tgtv_ridho/sensor/soil")) {
+            let id = data.topic.replace("tgtv_ridho/sensor/soil", "");
+            lastSeen[id] = now;
+            updateSensor(id, data.payload, now);
+          }
+
+          // STATUS HANDLING (Aktuator & Mode)
+          else if (data.topic === "tgtv_ridho/status/mode") {
+            currentMode = data.payload;
+            updateModeUI();
+          } else if (data.topic === "tgtv_ridho/status/pompa") {
+            document.getElementById("toggle-pompa").checked =
+              data.payload === "ON";
+          } else if (data.topic === "tgtv_ridho/status/valve1") {
+            document.getElementById("toggle-v1").checked =
+              data.payload === "ON";
+          } else if (data.topic === "tgtv_ridho/status/valve2") {
+            document.getElementById("toggle-v2").checked =
+              data.payload === "ON";
+          } else if (data.topic === "tgtv_ridho/status/valve3") {
+            document.getElementById("toggle-v3").checked =
+              data.payload === "ON";
+          }
+        } catch (e) {
+          console.error("Gagal memparsing pesan:", e);
+        }
+      };
+
+      // Fungsi Konversi Raw ADC ke Persentase (0-100%)
+      function calcPercentage(rawStr) {
+        let raw = parseInt(rawStr);
+        let pct = 100 - ((raw - 1000) / (4000 - 1000)) * 100;
+        if (pct > 100) pct = 100;
+        if (pct < 0) pct = 0;
+        return Math.round(pct);
+      }
+
+      // Fungsi Memperbarui Kartu Sensor dan Grafik
+      function updateSensor(id, rawVal, timestamp) {
+        let pct = calcPercentage(rawVal);
+
+        // Update Teks, RAW Text dan Progress SVG
+        document.getElementById(`val-${id}`).innerText = pct;
+        document.getElementById(`raw-${id}`).innerText = rawVal;
+        document
+          .getElementById(`svg-${id}`)
+          .setAttribute("stroke-dasharray", `${pct}, 100`);
+
+        // Update Label Badge (Ambang Kering = Raw 2500)
+        let statusBadge = document.getElementById(`status-${id}`);
+        if (parseInt(rawVal) >= 2500) {
+          statusBadge.innerText = "Drying";
+          statusBadge.className =
+            "inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-surface-variant text-on-surface-variant";
+        } else {
+          statusBadge.innerText = "Optimal";
+          statusBadge.className =
+            "inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-primary-fixed text-on-primary-fixed-variant";
+        }
+
+        // Tambahkan ke Grafik ApexCharts
+        appendChartData(parseInt(id), timestamp, pct);
+      }
+
+      // Menangani data grafik
+      let seriesData = { 1: [], 2: [], 3: [], 4: [] };
+      function appendChartData(id, time, val) {
+        seriesData[id].push([time, val]);
+        // Potong agar array tidak menumpuk berat di memory (Simpan maks 60 data terakhir)
+        if (seriesData[id].length > 60) seriesData[id].shift();
+
+        // Update seluruh series ke grafik
+        if (apexChart) {
+          apexChart.updateSeries([
+            { data: seriesData[1] },
+            { data: seriesData[2] },
+            { data: seriesData[3] },
+            { data: seriesData[4] },
+          ]);
+        }
+      }
+
+      // timer, mengecek apakah sensor tidak mengirim data (Timeout > 5 Detik = MATI)
+      setInterval(() => {
+        const now = Date.now();
+        for (let i = 1; i <= 4; i++) {
+          // Jika jeda dari update terakhir melebihi 5 detik
+          if (now - lastSeen[i] > 5000) {
+            document.getElementById(`val-${i}`).innerText = "--";
+            document.getElementById(`raw-${i}`).innerText = "--";
+            document
+              .getElementById(`svg-${i}`)
+              .setAttribute("stroke-dasharray", `0, 100`);
+
+            let badge = document.getElementById(`status-${i}`);
+            badge.innerText = "Mati";
+            badge.className =
+              "inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container";
+          }
+        }
+      }, 2000);
+
+      // Kirim Perintah Ganti Mode
+      function toggleMode() {
+        let newMode = currentMode === "auto" ? "manual" : "auto";
+        let command = { topic: "tgtv_ridho/kontrol/mode", payload: newMode };
+        ws.send(JSON.stringify(command));
+      }
+
+      // Update Tampilan Tombol Mode dan Lock Aktuator
+      function updateModeUI() {
+        let isAuto = currentMode === "auto";
+        let btnMode = document.getElementById("btn-mode");
+        let iconMode = document.getElementById("icon-mode");
+        let textMode = document.getElementById("text-mode");
+        let labelMode = document.getElementById("label-mode-status");
+
+        // Ganti warna tombol sidebar
+        if (isAuto) {
+          btnMode.className =
+            "w-full bg-primary text-on-primary text-body-bold font-body-bold py-sm rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center space-x-sm mb-md";
+          iconMode.innerText = "bolt";
+          textMode.innerText = "Manual Override";
+          labelMode.innerText = "AUTO";
+          labelMode.className = "font-bold text-primary";
+        } else {
+          btnMode.className =
+            "w-full bg-error text-on-error text-body-bold font-body-bold py-sm rounded-lg shadow-sm hover:opacity-90 transition-opacity flex items-center justify-center space-x-sm mb-md";
+          iconMode.innerText = "touch_app";
+          textMode.innerText = "Back to Auto";
+          labelMode.innerText = "MANUAL";
+          labelMode.className = "font-bold text-error";
+        }
+
+        // Disable/Enable Checkbox Aktuator
+        let toggles = document.querySelectorAll(".act-toggle");
+        toggles.forEach((t) => (t.disabled = isAuto));
+      }
+
+      // Kirim Perintah Kontrol (ON/OFF) Aktuator
+      function sendActuatorCmd(topic, isChecked) {
+        let payloadStr = isChecked ? "ON" : "OFF";
+        let command = { topic: topic, payload: payloadStr };
+        ws.send(JSON.stringify(command));
+      }
+
+      if (CSS.supports("padding-bottom: env(safe-area-inset-bottom)")) {
+        document
+          .querySelector(".pb-safe")
+          ?.classList.add("pb-[env(safe-area-inset-bottom)]");
+      }
+    </script>
+  </body>
+</html>

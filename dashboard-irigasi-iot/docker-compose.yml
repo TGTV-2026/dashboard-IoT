@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web-app:
+    build: 
+      context: .
+      target: builder # Hentikan build di stage 'builder' (menggunakan image golang)
+    container_name: dashboard-irigasi-iot
+    ports:
+      - "8123:8123"
+    volumes:
+      # Mount (hubungkan) file dan folder secara spesifik
+      # Ini akan membuat container membaca file langsung dari komputer fisik
+      - ./main.go:/app/main.go
+      - ./templates:/app/templates
+    environment:
+      - MQTT_BROKER_URL=tcp://broker.hivemq.com:1883
+    # Timpa perintah default agar menjalankan file Go secara langsung
+    command: go run main.go
